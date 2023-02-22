@@ -17,6 +17,13 @@ module Slideable
     end
 
     def moves
+        possible_moves = []
+        dirs = move_dirs
+        dirs.each do |dir|
+            x, y = dir
+            possible_moves += grow_unblocked_moves_in_dir(x, y)
+        end
+        possible_moves
     end
 
     private
@@ -25,5 +32,20 @@ module Slideable
     end
 
     def grow_unblocked_moves_in_dir(dx, dy)
+        moves = []
+        queue = [self.pos]
+        until queue.empty?
+            next_pos = queue.shift
+            x, y = next_pos
+            new_pos = [x + dx, y +dy]
+            # validate nothing in that space, pos is on the board
+            if self.board[new_pos] == "empty"
+                moves << new_pos
+            else
+                break
+            end
+            queue << new_pos
+            # eventually add logic for capturing opponent
+        end
     end
 end

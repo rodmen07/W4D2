@@ -9,11 +9,11 @@ class Board
     @rows.each.with_index do |row, i|
       row.each_with_index do |col, j|
         if i <= 1
-          self[i, j] = Piece.new("white", self, [i,j])
+          self[[i, j]] = Piece.new("white", self, [i,j])
         elsif i >= 6
-          self[i, j] = Piece.new("black", self, [i,j])
+          self[[i, j]] = Piece.new("black", self, [i,j])
         else
-          self[i, j] = nil
+          self[[i, j]] = "empty"
         end
       end
     end
@@ -21,11 +21,24 @@ class Board
   end
 
 
-  def [](row, col)
+  def [](pos)
+    row, col = pos
+
+    if row < 0 || col < 0 || row > 7 || col > 7
+      return nil
+    end
+
     return @rows[row][col]
   end
 
-  def []=(row, col ,val)
+  def []=(pos ,val)
+    row, col = pos
+
+    if row < 0 || col < 0 || row > 7 || col > 7
+      p "not a valid position on board"
+      return nil
+    end
+
     @rows[row][col] = val
     return @rows[row][col]
   end
