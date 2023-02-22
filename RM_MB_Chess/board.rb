@@ -9,10 +9,10 @@ class Board
 
     @rows.each.with_index do |row, i|
       row.each_with_index do |col, j|
-        if i <= 1
-          self[[i, j]] = Bishop.new("white", self, [i,j])
-        elsif i >= 6
-          self[[i, j]] = Bishop.new("black", self, [i,j])
+        if i == 1
+          self[[i, j]] = Pawn.new("white", self, [i,j])
+        elsif i == 6
+          self[[i, j]] = Pawn.new("black", self, [i,j])
         else
           self[[i, j]] = np
         end
