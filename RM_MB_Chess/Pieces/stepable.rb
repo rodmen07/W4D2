@@ -6,7 +6,7 @@ module Stepable
             dx, dy = diff
             x, y = self.pos
             new_pos = [x + dx, y + dy]
-            possible_moves << new_pos if self.board[new_pos] == "E"
+            possible_moves << new_pos if self.board[new_pos].is_a?(NullPiece)
         end
         possible_moves
     end

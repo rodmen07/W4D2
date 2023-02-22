@@ -3,6 +3,7 @@ require_relative "requirements.rb"
 class Board
   attr_reader :rows
   def initialize
+    np = NullPiece.instance()
     # @null_piece = NullPiece.instance
     @rows = Array.new(8) { Array.new(8) }
 
@@ -13,8 +14,7 @@ class Board
         elsif i >= 6
           self[[i, j]] = Bishop.new("black", self, [i,j])
         else
-          # TODO: replace with NullPiece
-          self[[i, j]] = "E"
+          self[[i, j]] = np
         end
       end
     end
@@ -28,8 +28,13 @@ class Board
 
     n = Knight.new("black", self, [5, 4])
     self[[5,4]] = n
+
     k = King.new("black",self,[2,2])
     self[[2,2]] = k
+
+    
+    self[[6,3]] = np
+
     puts "valid moves for king"
     puts
     p k.moves
@@ -92,8 +97,7 @@ class Board
   def move_piece(start_pos, end_pos)
     piece = self[start_pos]
 
-    # TODO: replace with NullPiece
-    if piece == "E"
+    if piece.is_a?(NullPiece)
       p "no piece at given starting position"
       return false
     elsif piece.moves.include?(end_pos)
