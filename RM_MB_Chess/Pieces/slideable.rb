@@ -1,6 +1,6 @@
 module Slideable
 
-    HORIZONTAL_AND_VERTICAL DIRS = [
+    HORIZONTAL_AND_VERTICAL_DIRS = [
         [0,-1],
         [0,1],
         [-1,0],
@@ -16,7 +16,7 @@ module Slideable
 
     def horizontal_and_vertical_dirs
         # getter for HORIZONTAL_AND_VERTICAL DIRS
-        HORIZONTAL_AND_VERTICAL
+        HORIZONTAL_AND_VERTICAL_DIRS
     end
 
     def diagonal_dirs
