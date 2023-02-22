@@ -56,3 +56,12 @@ class Board
   end
 
 end
+
+
+# b = Board.new()
+# p b
+# bish = Bishop.new("black",b,[0,0])
+# puts
+# puts 
+# b[0,0] = bish
+# p b
