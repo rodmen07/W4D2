@@ -47,7 +47,7 @@ module Slideable
             x, y = next_pos
             new_pos = [x + dx, y +dy]
             # validate nothing in that space, pos is on the board
-            if self.board[new_pos] == "empty"
+            if self.board[new_pos] == "E"
                 moves << new_pos
             else
                 break
@@ -55,5 +55,6 @@ module Slideable
             queue << new_pos
             # eventually add logic for capturing opponent
         end
+        moves
     end
 end

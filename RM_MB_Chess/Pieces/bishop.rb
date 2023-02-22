@@ -25,7 +25,7 @@ class Bishop < Piece
     end
 
     def symbol
-        :B
+        "B"
     end
 
     protected

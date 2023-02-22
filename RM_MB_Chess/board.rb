@@ -9,17 +9,26 @@ class Board
     @rows.each.with_index do |row, i|
       row.each_with_index do |col, j|
         if i <= 1
-          self[[i, j]] = Piece.new("white", self, [i,j])
+          self[[i, j]] = Bishop.new("white", self, [i,j])
         elsif i >= 6
-          self[[i, j]] = Piece.new("black", self, [i,j])
+          self[[i, j]] = Bishop.new("black", self, [i,j])
         else
-          self[[i, j]] = "empty"
+          self[[i, j]] = "E"
         end
       end
     end
     return true
   end
 
+  def render
+    @rows.each.with_index do |row, i|
+      row.each_with_index do |col, j|
+        print @rows[i][j].to_s + " "
+      end
+      puts
+    end
+    return true
+  end
 
   def [](pos)
     row, col = pos
@@ -58,10 +67,8 @@ class Board
 end
 
 
-# b = Board.new()
-# p b
-# bish = Bishop.new("black",b,[0,0])
-# puts
-# puts 
-# b[0,0] = bish
-# p b
+b = Board.new()
+b.render
+p b[[1,0]]
+b_1 = b[[1,0]]
+p b_1.moves

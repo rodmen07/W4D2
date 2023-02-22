@@ -8,6 +8,7 @@ attr_accessor :pos
   end
 
   def to_s
+    self.symbol
   end
 
   def empty?
@@ -23,8 +24,8 @@ attr_accessor :pos
   def move_into_check?(end_pos)
   end
 
-  def Symbol
-  end
+  # def Symbol
+  # end
 
   attr_reader :board
   private
