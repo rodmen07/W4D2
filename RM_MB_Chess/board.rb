@@ -61,7 +61,7 @@ class Board
     elsif self[end_pos] != nil
       p "already a piece at end position"
     end
-    return self[[row, col]]
+    return self[end_pos]
   end
 
 end
