@@ -18,6 +18,28 @@ class Board
         end
       end
     end
+
+    r1 = Rook.new("white",self,[0,0])
+    r2 = Rook.new("white",self,[5,5])
+    self[[0,0]] = r1
+    self[[5,5]] = r2
+
+    q = Queen.new("black",self,[2,2])
+    self[[2,2]] = q
+
+    puts "valid moves for r1"
+    puts
+    p r1.moves
+    puts
+    puts "valid moves for r2"
+    p r2.moves
+    puts
+
+    puts "valid moves for q"
+    p q.moves
+    p q.moves.length
+    puts
+
     return true
   end
 
@@ -54,19 +76,21 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
+    piece = self[start_pos]
+
     # TODO: replace with NullPiece
-    if self[start_pos] == "E"
+    if piece == "E"
       p "no piece at given starting position"
-    end
-    # TODO: replace with NullPiece
-    if self[end_pos] == "E"
+      return false
+    elsif piece.moves.include?(end_pos)
       self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
     else
-      p "already a piece at end position"
+      p "invalid destination for piece"
+      return false
     end
-    return self[end_pos]
-  end
 
+    return true
+  end
 end
 
 
@@ -79,3 +103,15 @@ b.render
 b.move_piece([1,0],[3,2])
 puts
 b.render
+puts
+b.move_piece([3,2],[3,5])
+puts
+b.render
+puts
+puts "move from 5,5 to 5,0"
+b.move_piece([5,5],[5,0])
+b.render
+puts
+puts "move from 5,0 to 3,3"
+b.render
+b.move_piece([5,0],[3,3])
