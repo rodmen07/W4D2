@@ -23,22 +23,36 @@ class Board
     r2 = Rook.new("white",self,[5,5])
     self[[0,0]] = r1
     self[[5,5]] = r2
-
     q = Queen.new("black",self,[2,2])
     self[[2,2]] = q
 
-    puts "valid moves for r1"
+    n = Knight.new("black", self, [5, 4])
+    self[[5,4]] = n
+    k = King.new("black",self,[2,2])
+    self[[2,2]] = k
+    puts "valid moves for king"
     puts
-    p r1.moves
-    puts
-    puts "valid moves for r2"
-    p r2.moves
+    p k.moves
     puts
 
-    puts "valid moves for q"
-    p q.moves
-    p q.moves.length
-    puts
+    # Test logic for rook/queen/knight
+    # puts "valid moves for r1"
+    # puts
+    # p r1.moves
+    # puts
+    # puts "valid moves for r2"
+    # p r2.moves
+    # puts
+
+    # puts "valid moves for q"
+    # p q.moves
+    # p q.moves.length
+    # puts
+
+    # puts "valid moves for knight"
+    # puts
+    # p n.moves
+    # puts
 
     return true
   end
@@ -88,9 +102,6 @@ class Board
       p "invalid destination for piece"
       return false
     end
-    return self[end_pos]
-  end
-
     return true
   end
 end
@@ -98,22 +109,32 @@ end
 
 b = Board.new()
 b.render
-p b[[1,0]]
-b_1 = b[[1,0]]
-p b_1.moves
-b.render
-b.move_piece([1,0],[3,2])
+
+b.move_piece([2,2], [0,0])
 puts
+b.move_piece([2,2], [2,3])
 b.render
-puts
-b.move_piece([3,2],[3,5])
-puts
-b.render
-puts
-puts "move from 5,5 to 5,0"
-b.move_piece([5,5],[5,0])
-b.render
-puts
-puts "move from 5,0 to 3,3"
-b.render
-b.move_piece([5,0],[3,3])
+
+# b.move_piece([5,4], [0,0])
+# puts
+# b.move_piece([5,4], [3,3])
+# b.render
+# p b[[1,0]]
+# b_1 = b[[1,0]]
+# p b_1.moves
+# b.render
+# b.move_piece([1,0],[3,2])
+# puts
+# b.render
+# puts
+# b.move_piece([3,2],[3,5])
+# puts
+# b.render
+# puts
+# puts "move from 5,5 to 5,0"
+# b.move_piece([5,5],[5,0])
+# b.render
+# puts
+# puts "move from 5,0 to 3,3"
+# b.render
+# b.move_piece([5,0],[3,3])
