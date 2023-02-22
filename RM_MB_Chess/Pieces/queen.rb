@@ -1,13 +1,20 @@
-# class Queen < Piece
-#   include Slideable
+require_relative "piece.rb"
+require_relative "slideable.rb"
 
-#   def initialize(color, board, pos)
-#     super
-#     @symbol = :R
-#   end
+class Queen < Piece
+    include Slideable
 
-#   private
-#   def move_dirs
-#     @move_dirs = #vertical/horizontal, diagonal
-#   end
-# end
+    def initialize(color, board, pos)
+        super
+    end
+
+    def symbol
+        "Q"
+    end
+
+    protected
+
+    def move_dirs
+        diagonal_dirs + horizontal_and_vertical_dirs
+    end
+end
