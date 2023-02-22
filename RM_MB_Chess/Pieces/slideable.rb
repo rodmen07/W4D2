@@ -47,6 +47,7 @@ module Slideable
             x, y = next_pos
             new_pos = [x + dx, y +dy]
             # validate nothing in that space, pos is on the board
+            # TODO: replace with NullPiece
             if self.board[new_pos] == "E"
                 moves << new_pos
             else
