@@ -1,17 +1,11 @@
-# require 'singleton'
-# require_relative 'piece.rb'
+class NullPiece < Piece
 
-# class NullPiece < Piece
-#   include Singleton
-#   def initialize()
-#     @color = nil
-#     @symbol = :N
-#   end
+  def initialize
+  end
 
-#   def moves
-#   end
-#   attr_reader :symbol, :color
-# end
+  def moves
+  end
 
-# NullPiece.new
-# p NullPiece.instance
+  def symbol
+  end
+end

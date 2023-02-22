@@ -1,33 +1,45 @@
 require_relative "requirements.rb"
 
 class Board
+  attr_reader :rows
   def initialize
-    @rows = Array.new(8) { Array.new(8) }
     # @null_piece = NullPiece.instance
+    @rows = Array.new(8) { Array.new(8) }
+
+    @rows.each.with_index do |row, i|
+      row.each_with_index do |col, j|
+        if i <= 1
+          self[i, j] = Piece.new("white", self, [i,j])
+        elsif i >= 6
+          self[i, j] = Piece.new("black", self, [i,j])
+        else
+          self[i, j] = nil
+        end
+      end
+    end
+    return true
   end
 
-  def [](pos)
-    row, col = pos
-    @rows[row][col]
+
+  def [](row, col)
+    return @rows[row][col]
   end
 
-  def []=(pos,val)
-    row, col = pos
+  def []=(row, col ,val)
     @rows[row][col] = val
+    return @rows[row][col]
   end
 
   def move_piece(start_pos, end_pos)
-    p "no piece at given starting position" if self[start_pos] == nil
-
+    if self[start_pos] == nil
+      p "no piece at given starting position"
+    end
     if self[end_pos] == nil
-      self[start_pos], self[end_pos] = self[end_pos], self[start_pos]  
+      self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
     elsif self[end_pos] != nil
       p "already a piece at end position"
     end
+    return self[[row, col]]
   end
 
 end
-
-bish = Bishop.new("black","b",[3,2])
-p bish
-p bish.moves

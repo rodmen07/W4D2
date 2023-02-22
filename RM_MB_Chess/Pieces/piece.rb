@@ -1,25 +1,3 @@
-# require_relative "rook_bishop_queen.rb"
-
-
-  def moves()
-    p directions
-    x_1, y_1 = self.pos
-    moves = []
-    directions.each do |dirs|
-      x_2, y_2 = dirs
-      # debugger if [x_1,x_2,y_1,y_2].any? {|c| c.nil?}
-      moves << [x_1 + x_2, y_1 + y_2]
-    end
-  end
-
-  def move_dirs
-  end
-
-end
-
-module Stepable
-end
-
 class Piece
 attr_accessor :pos
 
@@ -29,9 +7,7 @@ attr_accessor :pos
     @pos = pos
   end
 
-  def to_s()
-    sym = self.board[self.pos].symbol
-    return sym
+  def to_s
   end
 
   def empty?
