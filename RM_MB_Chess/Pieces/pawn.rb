@@ -1,4 +1,5 @@
 class Pawn < Piece
+    attr_accessor :pos, :color
 
     def initialize(color, board, pos)
         super
@@ -15,12 +16,14 @@ class Pawn < Piece
         dirs.each do |dir|
             dx, dy = dir
             new_pos = [x + dx, y + dy]
-            possible_moves << new_pos if self.board[new_pos].is_a(NullPiece)
+            next if !self.board[new_pos].is_a?(NullPiece)
+            next if dx.abs == 2 && !self.board[[x + (dx / 2), y]].is_a?(NullPiece)
+            possible_moves << new_pos
         end
         return possible_moves
     end
 
-    protected
+    # protected
 
     def at_start_row?
         r, c = self.pos
@@ -46,5 +49,5 @@ class Pawn < Piece
         end
         return forward_dirs
     end
-    
+
 end

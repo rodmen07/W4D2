@@ -4,7 +4,6 @@ class Board
   attr_reader :rows
   def initialize
     np = NullPiece.instance()
-    # @null_piece = NullPiece.instance
     @rows = Array.new(8) { Array.new(8) }
 
     @rows.each.with_index do |row, i|
@@ -17,55 +16,42 @@ class Board
           self[[i, j]] = np
         end
       end
+      self.add_pieces("white")
+      self.add_pieces("black")
     end
-
-    r1 = Rook.new("white",self,[0,0])
-    r2 = Rook.new("white",self,[5,5])
-    self[[0,0]] = r1
-    self[[5,5]] = r2
-    q = Queen.new("black",self,[2,2])
-    self[[2,2]] = q
-
-    n = Knight.new("black", self, [5, 4])
-    self[[5,4]] = n
-
-    k = King.new("black",self,[2,2])
-    self[[2,2]] = k
-
-    
-    self[[6,3]] = np
-
-    puts "valid moves for king"
-    puts
-    p k.moves
-    puts
-
-    # Test logic for rook/queen/knight
-    # puts "valid moves for r1"
-    # puts
-    # p r1.moves
-    # puts
-    # puts "valid moves for r2"
-    # p r2.moves
-    # puts
-
-    # puts "valid moves for q"
-    # p q.moves
-    # p q.moves.length
-    # puts
-
-    # puts "valid moves for knight"
-    # puts
-    # p n.moves
-    # puts
-
     return true
+  end
+
+  def add_pieces(color)
+    row = 0 if color == "white"
+    row = 7 if color == "black"
+
+    p1 = Rook.new(color, self, [row, 0])
+    p2 = Rook.new(color, self, [row, 7])
+    self[[row, 0]] = p1
+    self[[row, 7]] = p2
+
+    p1 = Knight.new(color, self, [row, 1])
+    p2 = Knight.new(color, self, [row, 6])
+    self[[row, 1]] = p1
+    self[[row, 6]] = p2
+
+    p1 = Bishop.new(color, self, [row, 2])
+    p2 = Bishop.new(color, self, [row, 5])
+    self[[row, 2]] = p1
+    self[[row, 5]] = p2
+
+    self[[0,3]] = King.new("white", self, [0,3])
+    self[[7,3]] = King.new("black", self, [7,3])
+    self[[0,4]] = Queen.new("white", self, [0,4])
+    self[[7,4]] = Queen.new("black", self, [7,4])
   end
 
   def render
     @rows.each.with_index do |row, i|
       row.each_with_index do |col, j|
-        print @rows[i][j].to_s + " "
+        print @rows[i][j]
+        print " "
       end
       puts
     end
@@ -99,13 +85,17 @@ class Board
 
     if piece.is_a?(NullPiece)
       p "no piece at given starting position"
+      self.render
       return false
     elsif piece.moves.include?(end_pos)
       self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
+      self[end_pos].pos = end_pos
     else
       p "invalid destination for piece"
+      self.render
       return false
     end
+    self.render
     return true
   end
 end
@@ -114,11 +104,10 @@ end
 b = Board.new()
 b.render
 
-b.move_piece([2,2], [0,0])
-puts
-b.move_piece([2,2], [2,3])
-b.render
-
+# b.move_piece([2,2], [0,0])
+# puts
+# b.move_piece([2,2], [2,3])
+# b.render
 # b.move_piece([5,4], [0,0])
 # puts
 # b.move_piece([5,4], [3,3])
@@ -142,3 +131,43 @@ b.render
 # puts "move from 5,0 to 3,3"
 # b.render
 # b.move_piece([5,0],[3,3])
+
+# r1 = Rook.new("white",self,[0,0])
+# r2 = Rook.new("white",self,[5,5])
+# self[[0,0]] = r1
+# self[[5,5]] = r2
+# q = Queen.new("black",self,[2,2])
+# self[[2,2]] = q
+
+# n = Knight.new("black", self, [5, 4])
+# self[[5,4]] = n
+
+# k = King.new("black",self,[2,2])
+# self[[2,2]] = k
+
+
+# self[[6,3]] = np
+
+# puts "valid moves for king"
+# puts
+# p k.moves
+# puts
+
+# Test logic for rook/queen/knight
+# puts "valid moves for r1"
+# puts
+# p r1.moves
+# puts
+# puts "valid moves for r2"
+# p r2.moves
+# puts
+
+# puts "valid moves for q"
+# p q.moves
+# p q.moves.length
+# puts
+
+# puts "valid moves for knight"
+# puts
+# p n.moves
+# puts
