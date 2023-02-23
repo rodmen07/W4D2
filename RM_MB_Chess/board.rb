@@ -80,7 +80,7 @@ class Board
     return @rows[row][col]
   end
 
-  def move_piece(start_pos, end_pos)
+  def move_piece(start_pos, end_pos, c = "idk")
     piece = self[start_pos]
 
     if piece.is_a?(NullPiece)
@@ -101,8 +101,8 @@ class Board
 end
 
 
-b = Board.new()
-b.render
+# b = Board.new()
+# b.render
 
 # b.move_piece([2,2], [0,0])
 # puts

@@ -7,3 +7,5 @@ require './Pieces/knight.rb'
 require './Pieces/king.rb'
 require_relative "./Pieces/nullpiece.rb"
 require "byebug"
+require_relative "cursor.rb"
+require "colorize"
